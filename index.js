@@ -1,11 +1,12 @@
 const express = require('express');
-const dotenv = require('dotenv').config();
-const cors = require('cors');
-
-
-
-const DB_URL=process.env.DB_URL;
+const db = require('./src/utils/database/db');
 const housesRoutes = require('./src/api/houses/houses.routes');
+const cors = require('cors');
+require('dotenv').config();
+
+db.connectDb();
+//const DB_URL=process.env.DB_URL;
+
 
 const server=express();
 const PORT=process.env.PORT || 4000;
