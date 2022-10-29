@@ -1,8 +1,8 @@
 const express = require('express');
-const db = require('./src/utils/database/db');
 const housesRoutes = require('./src/api/houses/houses.routes');
 const cors = require('cors');
 require('dotenv').config();
+const db = require('./src/utils/database/db');
 
 db.connectDb();
 //const DB_URL=process.env.DB_URL;
@@ -23,5 +23,5 @@ server.use('/houses', housesRoutes);
 
 
 server.listen(PORT, () =>{
-    console.log(`bienvenido a la API de Hogwarts en http://localhost:${PORT}`)
+    console.log(`Bienvenido a la API de Hogwarts en http://localhost:${PORT}`)
 });
