@@ -23,5 +23,5 @@ server.use('/houses', housesRoutes);
 
 
 server.listen(PORT, () =>{
-    console.log(`bienvenido a la API de Hogwarts en http://localhost:${PORT}`)
+    console.log(`Bienvenido a la API de Hogwarts en http://localhost:${PORT}`)
 });
