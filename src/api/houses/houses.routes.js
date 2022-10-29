@@ -23,4 +23,26 @@ router.post("/create", async (req, res) => {
   }
 });
 
+router.put("/modify/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const house = req.body;
+    const houseModifier = new House(house);
+    houseModifier._id= id;
+    const houseToModify = await House.findByIdAndUpdate(id, houseModifier);
+    return res.status(200).json('objeto modificado con éxito');
+  } catch (error) {
+    return res.status(500).json('Este objeto no puede modificarse');
+  }
+});
+
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const houseToDelete = await House.findByIdAndRemove(id);
+    return res.status(200).json("La casa ha sido condenada al olvido");
+  } catch (error) {
+      return res.status(500).json("Esta casa es inamovible");
+  }
+});
 module.exports = router;
