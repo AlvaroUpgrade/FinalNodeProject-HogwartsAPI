@@ -1,4 +1,5 @@
 const express = require("express");
+const isAuth = require("../../middlewares/auth");
 const House = require("./houses.model");
 const router = express.Router();
 
@@ -12,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/create", async (req, res) => {
+router.post("/create", [isAuth] , async (req, res) => {
   try {
     const postedHouse = req.body;
     const newHouse = new House(postedHouse);
@@ -23,7 +24,7 @@ router.post("/create", async (req, res) => {
   }
 });
 
-router.put("/modify/:id", async (req, res) => {
+router.put("/modify/:id", [isAuth] , async (req, res) => {
   try {
     const id = req.params.id;
     const house = req.body;
@@ -36,7 +37,7 @@ router.put("/modify/:id", async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", [isAuth] , async (req, res) => {
   try {
     const id = req.params.id;
     const houseToDelete = await House.findByIdAndRemove(id);

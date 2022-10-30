@@ -1,6 +1,7 @@
 const express = require("express");
 const Character = require("./characters.model");
 const router = express.Router();
+const isAuth = require("../../middlewares/auth");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -11,7 +12,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/create", async (req, res) => {
+router.post("/create", [isAuth], async (req, res) => {
   try {
     const postedCharacters = req.body;
     const newCharacter = new Character(postedCharacters);
@@ -22,7 +23,7 @@ router.post("/create", async (req, res) => {
   }
 });
 
-router.put("/modify/:id", async (req, res) => {
+router.put("/modify/:id", [isAuth], async (req, res) => {
   try {
     const id = req.params.id;
     const  character = req.body;
@@ -35,7 +36,7 @@ router.put("/modify/:id", async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", [isAuth] , async (req, res) => {
   try {
     const id = req.params.id;
     const characterToDelete = await Character.findByIdAndRemove(id);
