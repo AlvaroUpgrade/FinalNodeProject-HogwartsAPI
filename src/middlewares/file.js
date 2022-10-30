@@ -2,7 +2,7 @@ const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-const folder = new CloudinaryStorage({
+const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "hpPics",
@@ -10,6 +10,6 @@ const folder = new CloudinaryStorage({
   },
 });
 
-const upload = multer({ folder });
+const upload = multer({ storage });
 
 module.exports = upload;

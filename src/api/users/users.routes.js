@@ -20,8 +20,10 @@ router.get("/", async (req, res) => {
 router.post("/sign-up", upload.single("picture"), async (req, res) => {
   try {
     const userBody = req.body;
+    
     if (req.file) {
       userBody.picture = req.file.path;
+      console.log("IF: ",req.file.path);
     } else {
       userBody.picture = req.body.picture;
     }
@@ -61,7 +63,7 @@ router.post("/logout", async (req, res) => {
   }
 });
 
-router.put("/edit-profile/:id", [isAuth], upload.single("picture"), async (req, res) => {
+router.put("/edit-profile/:id",[isAuth],upload.single("picture"),async (req, res) => {
     try {
       const id = req.params.id;
       const user = req.body;
